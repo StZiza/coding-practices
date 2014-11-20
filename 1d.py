@@ -7,11 +7,13 @@ from time import time
 #                                           #
 #############################################
  
-t_init = time()
+t_init = time() #time calculation
+
+
 #Assume we have one dimensional coordinate and apply PBC for any given point:
  
 Rand = np.random.randint(0, 1000)   
-D1 = range(Rand)
+D1 = range(Rand) #create random array with 'Rand' elements in it.
  
 value = np.random.randint(-10000, 20000)
  
@@ -26,6 +28,8 @@ else:
     nvalue = value
  
 print nvalue
- 
+
+
+# time calculation and printing 
 t_fin = time() - t_init
 print t_fin
