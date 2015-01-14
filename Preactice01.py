@@ -3,7 +3,7 @@ from time import time
 
 #############################################
 #                                           #      
-#   PBC One dimension implemention 2        #
+#   Pencil Beam                             #
 #                                           #
 #############################################
 
