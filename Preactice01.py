@@ -27,9 +27,9 @@ def pencil_beam(box_size, pbs): #I am defining a box_size of which the pencil be
     PB_e = PB_s + pbs #PB_s is the start point of my pencil beam and PB_e is the end point.
     
     if particle >= PB_s and particle < PB_e:
-        print "particle is in the box"
+        print "particle is in the pencil beam"
     else:
-        print "particle is NOT in the box"
+        print "particle is NOT in pencil beam"
         
     print PB_s, PB_e, particle
     return PB_s, PB_e
