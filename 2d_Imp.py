@@ -107,8 +107,8 @@ def halo_check(box_size, pbs): #seeing if the data point is in the pencil beam o
                 
     def PBC_ind(value):
     
-        fark = value + box_size*0.5
-        X_point = X1 + slope*fark
+        diff = value + box_size*0.5
+        X_point = X1 + slope*diff
         
         if abs(X_point) > box_size*0.5:
             X_point = X_point - box_size
