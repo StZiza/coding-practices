@@ -44,6 +44,10 @@ def pencil_beam(box_size, pbs): # pbs is the width of the pencil beam.
     PB_sfx = []
     PB_eix = []
     PB_efx = [] 
+    PB_siy = []
+    PB_sfy = []
+    PB_eiy = []
+    PB_efy = [] 
     
     np.random.seed() #clearing the seed so I can generate random pencil beam.
     six = np.random.uniform(-1, 1)*box_size*0.5
@@ -56,19 +60,41 @@ def pencil_beam(box_size, pbs): # pbs is the width of the pencil beam.
             
     PB_six.append(six)
     PB_eix.append(PBC(box_size, eix))
+    PB_siy.append(box_size*(-0.5))
+    PB_eiy.append(box_size*(-0.5))
     
     for i in range(times):
-        PB_sfx.append(PBC(box_size, PB_six[i] + slope*box_size))
+        PB_sfx.append(PBC(box_size, PB_six[i] + box_size/slope))
         PB_efx.append((box_size, PB_sfx[i] + pbs))
+        PB_sfy.append(box_size*(0.5))
+        PB_efy.append(box_size*(0.5))
         PB_six.append(PB_sfx[i])
         PB_eix.append(PB_efx[i])
+        PB_siy.append(box_size*(-0.5))
+        PB_eiy.append(box_size*(-0.5))
     
-
-    PB_sfx.append(PBC(box_size, PB_six[times] + slope*left))
+    PB_sfx.append(PBC(box_size, PB_six[times] + left/slope))
     PB_efx.append(PBC(box_size, PB_sfx[times] + pbs))
+    
+    if PB_six[len(PB_six)-1] < PB_sfx[len(PB_sfx)-1]:
+        yd = (PB_sfx[len(PB_sfx)-1] - PB_six[len(PB_six)-1])*slope
+    else:
+        yd = (box_size - (PB_six[len(PB_six)-1] - PB_sfx[len(PB_sfx)-1]))*slope
+    
+    PB_sfy.append(PB_siy[len(PB_siy)-1] + yd)
+    PB_efy.append(PB_eiy[len(PB_eiy)-1] + yd)
+    
+    for i in range(len(PB_six)):
+        if PB_six[i] < PB_sfx[i]:
+            pl.plot([PB_six[i], PB_sfx[i]], [PB_siy[i], PB_sfy[i]], 'k-', lw=1)
+        else:
+            Y2 = slope*(box_size*0.5 - PB_six[i]) - box_size*0.5
+            pl.plot([PB_six[i], 50], [PB_siy[i], Y2], 'k-', lw=1)
+            pl.plot([-50, PB_sfx[i]], [Y2, PB_sfy[i]], 'k-', lw=1)
         
     
     print PB_six, PB_sfx, PB_eix, PB_efx  #printing the results to check whether it works
+    print PB_siy, PB_sfy, PB_eiy, PB_efy
     return PB_six, PB_sfx, PB_eix, PB_efx, slope, times, left #The four values are all x values.
 
     
