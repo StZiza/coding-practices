@@ -52,7 +52,7 @@ def pencil_beam(box_size, pbs): # pbs is the width of the pencil beam.
     np.random.seed() #clearing the seed so I can generate random pencil beam.
     six = np.random.uniform(-1, 1)*box_size*0.5
     eix = six + pbs
-    pb_check = six + slope*box_size
+    pb_check = six + box_size/slope
     
     if pb_check < eix:
         print ("Pencil Beam intersects itself, try higher angle or narrow"
